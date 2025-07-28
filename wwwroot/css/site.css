@@ -1,0 +1,146 @@
+/* Theme Variables */
+:root {
+    --bs-body-bg: #ffffff;
+    --bs-body-color: #212529;
+    --bs-navbar-bg: #ffffff;
+    --bs-navbar-color: #212529;
+    --bs-footer-bg: #f8f9fa;
+    --bs-footer-color: #6c757d;
+    --bs-card-bg: #ffffff;
+    --bs-border-color: #dee2e6;
+}
+
+[data-bs-theme="dark"] {
+    --bs-body-bg: #212529;
+    --bs-body-color: #ffffff;
+    --bs-navbar-bg: #343a40;
+    --bs-navbar-color: #ffffff;
+    --bs-footer-bg: #1a1d20;
+    --bs-footer-color: #adb5bd;
+    --bs-card-bg: #343a40;
+    --bs-border-color: #495057;
+}
+
+/* Base Styles */
+body {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Navigation Styles */
+.navbar {
+    background-color: var(--bs-navbar-bg) !important;
+    border-bottom-color: var(--bs-border-color) !important;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-brand,
+.nav-link {
+    color: var(--bs-navbar-color) !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--bs-navbar-color) !important;
+    opacity: 0.8;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: var(--bs-footer-bg);
+    color: var(--bs-footer-color);
+    border-top-color: var(--bs-border-color) !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Card Styles for Book listings */
+.card {
+    background-color: var(--bs-card-bg);
+    border-color: var(--bs-border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Form Styles */
+.form-control,
+.form-select {
+    background-color: var(--bs-card-bg);
+    border-color: var(--bs-border-color);
+    color: var(--bs-body-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--bs-card-bg);
+    border-color: #86b7fe;
+    color: var(--bs-body-color);
+}
+
+/* Table Styles */
+.table {
+    --bs-table-bg: var(--bs-card-bg);
+    --bs-table-border-color: var(--bs-border-color);
+    color: var(--bs-body-color);
+}
+
+/* Dark Mode Toggle Button */
+.theme-toggle {
+    background: none;
+    border: 1px solid var(--bs-border-color);
+    color: var(--bs-navbar-color);
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.theme-toggle:hover {
+    background-color: var(--bs-border-color);
+    transform: scale(1.05);
+}
+
+.theme-icon {
+    font-size: 1.1rem;
+}
+
+/* Dark mode specific overrides */
+[data-bs-theme="dark"] .navbar-light {
+    --bs-navbar-color: #ffffff;
+    --bs-navbar-hover-color: #f8f9fa;
+    --bs-navbar-active-color: #ffffff;
+}
+
+[data-bs-theme="dark"] .btn-outline-primary {
+    color: #86b7fe;
+    border-color: #86b7fe;
+}
+
+[data-bs-theme="dark"] .btn-outline-primary:hover {
+    background-color: #86b7fe;
+    color: #000;
+}
+
+[data-bs-theme="dark"] .btn-outline-secondary {
+    color: #adb5bd;
+    border-color: #6c757d;
+}
+
+[data-bs-theme="dark"] .btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+[data-bs-theme="dark"] .btn-outline-danger {
+    color: #ea868f;
+    border-color: #dc3545;
+}
+
+[data-bs-theme="dark"] .btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
