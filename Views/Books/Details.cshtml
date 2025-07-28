@@ -1,0 +1,49 @@
+@model BookMvcApp.Models.Book
+
+@{
+    ViewData["Title"] = "Book Details";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="card-title mb-0">@Html.DisplayFor(model => model.Title)</h2>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Author)</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Author)</dd>
+
+                        @if (!string.IsNullOrEmpty(Model.Genre))
+                        {
+                            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Genre)</dt>
+                            <dd class="col-sm-9">@Html.DisplayFor(model => model.Genre)</dd>
+                        }
+
+                        @if (Model.PublishedDate.HasValue)
+                        {
+                            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.PublishedDate)</dt>
+                            <dd class="col-sm-9">@Model.PublishedDate.Value.ToString("MMMM dd, yyyy")</dd>
+                        }
+
+                        <dt class="col-sm-3">Reading Status</dt>
+                        <dd class="col-sm-9">
+                            <span class="badge @(Model.IsRead ? "bg-success" : "bg-secondary") fs-6">
+                                @(Model.IsRead ? "✓ Read" : "Not Read Yet")
+                            </span>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group" role="group">
+                        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-outline-primary">Edit</a>
+                        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                        <a asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-outline-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
