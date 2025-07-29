@@ -5,19 +5,12 @@ using BookMvcApp.Models;
 
 namespace BookMvcApp.Controllers
 {
-    public class BooksController : Controller
+    public class BooksController(BookDbContext context) : Controller
     {
-        private readonly BookDbContext _context;
-
-        public BooksController(BookDbContext context)
-        {
-            _context = context;
-        }
-
         // GET: Books
         public async Task<IActionResult> Index()
         {
-            var books = await _context.Books.ToListAsync();
+            var books = await context.Books.ToListAsync();
             return View(books);
         }
 
@@ -29,7 +22,7 @@ namespace BookMvcApp.Controllers
                 return NotFound();
             }
 
-            var book = await _context.Books
+            var book = await context.Books
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (book == null)
             {
@@ -52,8 +45,8 @@ namespace BookMvcApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(book);
-                await _context.SaveChangesAsync();
+                context.Add(book);
+                await context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(book);
@@ -67,7 +60,7 @@ namespace BookMvcApp.Controllers
                 return NotFound();
             }
 
-            var book = await _context.Books.FindAsync(id);
+            var book = await context.Books.FindAsync(id);
             if (book == null)
             {
                 return NotFound();
@@ -89,8 +82,8 @@ namespace BookMvcApp.Controllers
             {
                 try
                 {
-                    _context.Update(book);
-                    await _context.SaveChangesAsync();
+                    context.Update(book);
+                    await context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -116,7 +109,7 @@ namespace BookMvcApp.Controllers
                 return NotFound();
             }
 
-            var book = await _context.Books
+            var book = await context.Books
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (book == null)
             {
@@ -131,19 +124,19 @@ namespace BookMvcApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var book = await _context.Books.FindAsync(id);
+            var book = await context.Books.FindAsync(id);
             if (book != null)
             {
-                _context.Books.Remove(book);
+                context.Books.Remove(book);
             }
 
-            await _context.SaveChangesAsync();
+            await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool BookExists(int id)
         {
-            return _context.Books.Any(e => e.Id == id);
+            return context.Books.Any(e => e.Id == id);
         }
     }
 }
