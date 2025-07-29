@@ -1,12 +1,26 @@
 using Microsoft.EntityFrameworkCore;
 using BookMvcApp.Models;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace BookMvcApp.Data
 {
-    public class BookDbContext : DbContext
+    public sealed class BookDbContext : DbContext
     {
         public BookDbContext(DbContextOptions<BookDbContext> options) : base(options)
         {
+            try
+            {
+                var databaseCreator = (RelationalDatabaseCreator)Database.GetService<IDatabaseCreator>();
+
+                if (!databaseCreator.Exists()) databaseCreator.Create();
+                if (!databaseCreator.HasTables()) databaseCreator.CreateTables();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public DbSet<Book> Books { get; set; }
