@@ -117,3 +117,7 @@ start from scratch and add the containerization yourself:
 ```bash
 git checkout before-docker
 ```
+
+## License
+
+Released under the [MIT License](LICENSE) — take any of it and use it however you like.
